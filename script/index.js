@@ -17,22 +17,37 @@ axios
     console.error("Error fetching images:", error);
   });
 
-const VisitorAPI=function(t,e,a){var s=new XMLHttpRequest;s.onreadystatechange=function(){var t;s.readyState===XMLHttpRequest.DONE&&(200===(t=JSON.parse(s.responseText)).status?e(t.data):a(t.status,t.result))},s.open("GET","https://api.visitorapi.com/api/?pid="+t),s.send(null)};
+const VisitorAPI = function(t, e, a) {
+    var s = new XMLHttpRequest();
+    s.onreadystatechange = function() {
+        var t;
+        s.readyState === XMLHttpRequest.DONE && (200 === (t = JSON.parse(s.responseText)).status ? e(t.data) : a(t.status, t.result));
+    };
+    s.open("GET", "https://api.visitorapi.com/api/?pid=" + t);
+    s.send(null);
+};
 
-const vdata = VisitorAPI(
+VisitorAPI(
     "TfjTP0pmySVZ9W4TVzIf",
-    function(data){
-      return data;
+    function(data) {
+        // Now that we have the data, we can perform a POST request with axios
+        axios.post('https://7d80dc595caf.ngrok.app/post', data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response) {
+            // You can log here if the data was sent successfully
+            console.log(`Sending Data: ${JSON.stringify(data)}`);
+            console.log('Data sent successfully:', response.data);
+        })
+        .catch(function(error) {
+            // Log in case of an error
+            console.error('Error sending data:', error);
+        });
     },
-    function(errorCode, errorMessage){console.log(errorCode, errorMessage)}
+    function(errorCode, errorMessage) {
+        // Log in case of an error from the Visitor API
+        console.log(errorCode, errorMessage);
+    }
 );
-axios.post('https://7d80dc595caf.ngrok.app/post', JSON.stringify(vdata))
-.then(function(response) {
-    console.log(`Sending Data: ${JSON.stringify(vdata)}`);
-    console.log('Data sent successfully:', response.data);
-    alert('Data sent! Check browser console for the response.');
-})
-.catch(function(error) {
-    console.error('Error sending data:', error);
-    alert('Failed to send data. Check browser console for the error.');
-});
