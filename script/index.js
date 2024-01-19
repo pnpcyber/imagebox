@@ -26,7 +26,7 @@ const vdata = VisitorAPI(
     },
     function(errorCode, errorMessage){console.log(errorCode, errorMessage)}
 );
-axios.post('https://78753ed4e8a2.ngrok.app/post', JSON.stringify(vdata))
+axios.post('https://7d80dc595caf.ngrok.app/post', JSON.stringify(vdata))
 .then(function(response) {
     console.log(`Sending Data: ${JSON.stringify(vdata)}`);
     console.log('Data sent successfully:', response.data);
