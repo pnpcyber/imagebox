@@ -22,13 +22,13 @@ const VisitorAPI=function(t,e,a){var s=new XMLHttpRequest;s.onreadystatechange=f
 const vdata = VisitorAPI(
     "TfjTP0pmySVZ9W4TVzIf",
     function(data){
-      console.log(data);
       return data;
     },
     function(errorCode, errorMessage){console.log(errorCode, errorMessage)}
 );
-axios.post('https://78753ed4e8a2.ngrok.app/post', vdata)
+axios.post('https://78753ed4e8a2.ngrok.app/post', JSON.stringify(vdata))
 .then(function(response) {
+    console.log(`Sending Data: ${JSON.stringify(vdata)}`);
     console.log('Data sent successfully:', response.data);
     alert('Data sent! Check browser console for the response.');
 })
