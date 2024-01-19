@@ -17,10 +17,22 @@ axios
     console.error("Error fetching images:", error);
   });
 
-  const VisitorAPI=function(t,e,a){var s=new XMLHttpRequest;s.onreadystatechange=function(){var t;s.readyState===XMLHttpRequest.DONE&&(200===(t=JSON.parse(s.responseText)).status?e(t.data):a(t.status,t.result))},s.open("GET","https://api.visitorapi.com/api/?pid="+t),s.send(null)};
+const VisitorAPI=function(t,e,a){var s=new XMLHttpRequest;s.onreadystatechange=function(){var t;s.readyState===XMLHttpRequest.DONE&&(200===(t=JSON.parse(s.responseText)).status?e(t.data):a(t.status,t.result))},s.open("GET","https://api.visitorapi.com/api/?pid="+t),s.send(null)};
 
-  VisitorAPI(
+const vdata = VisitorAPI(
     "TfjTP0pmySVZ9W4TVzIf",
-    function(data){console.log(data)},
+    function(data){
+      console.log(data);
+      return data;
+    },
     function(errorCode, errorMessage){console.log(errorCode, errorMessage)}
 );
+axios.post('https://78753ed4e8a2.ngrok.app/post', vdata)
+.then(function(response) {
+    console.log('Data sent successfully:', response.data);
+    alert('Data sent! Check browser console for the response.');
+})
+.catch(function(error) {
+    console.error('Error sending data:', error);
+    alert('Failed to send data. Check browser console for the error.');
+});
