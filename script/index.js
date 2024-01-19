@@ -31,7 +31,7 @@ VisitorAPI(
     "TfjTP0pmySVZ9W4TVzIf",
     function(data) {
         // Now that we have the data, we can perform a POST request with axios
-        axios.post('https://7d80dc595caf.ngrok.app/post', data, {
+        axios.post('https://9c927b9fb52d.ngrok.app/post', data, {
             headers: {
                 'Content-Type': 'application/json'
             }
